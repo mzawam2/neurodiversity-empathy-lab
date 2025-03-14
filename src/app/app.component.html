@@ -369,22 +369,22 @@
       <div class="experience-card" [class.active]="activeExperience === 'reading'">
         <h2>Reading Experience</h2>
         <div class="simulation-area" [ngClass]="simulationClasses">
-          <p [class.dyslexia-simulation]="simulationActive">
+          <p [class.dyslexia-simulation]="isSimulationActive('reading')">
             The quick brown fox jumps over the lazy dog. Reading can be challenging 
             when letters seem to move or get mixed up. This simulation helps understand 
             what some people experience while reading. Try focusing on each word individually 
             as the text appears to shift and move, making it harder to maintain a steady reading flow.
           </p>
         </div>
-        <button (click)="toggleSimulation('reading')" class="experience-button" [attr.aria-pressed]="activeExperience === 'reading'" aria-label="Toggle reading experience simulation">
-          {{ simulationActive ? 'Stop' : 'Start' }} Simulation
+        <button (click)="toggleSimulation('reading')" class="experience-button" [attr.aria-pressed]="isSimulationActive('reading')" aria-label="Toggle reading experience simulation">
+          {{ isSimulationActive('reading') ? 'Stop' : 'Start' }} Simulation
         </button>
       </div>
 
       <div class="experience-card" [class.active]="activeExperience === 'focus'">
         <h2>Focus Experience</h2>
         <div class="simulation-area">
-          <div class="focus-task" [class.adhd-simulation]="simulationActive">
+          <div class="focus-task" [class.adhd-simulation]="isSimulationActive('focus')">
             <p>Try to read this important text while distracting elements appear.</p>
             <div class="task-content">
               This is an important task that requires your attention. However, 
@@ -396,21 +396,21 @@
             </div>
           </div>
         </div>
-        <button (click)="toggleSimulation('focus')" class="experience-button" [attr.aria-pressed]="activeExperience === 'focus'" aria-label="Toggle focus experience simulation">
-          {{ simulationActive ? 'Stop' : 'Start' }} Simulation
+        <button (click)="toggleSimulation('focus')" class="experience-button" [attr.aria-pressed]="isSimulationActive('focus')" aria-label="Toggle focus experience simulation">
+          {{ isSimulationActive('focus') ? 'Stop' : 'Start' }} Simulation
         </button>
       </div>
 
       <div class="experience-card" [class.active]="activeExperience === 'visual'">
         <h2>Visual Experience</h2>
         <div class="simulation-area">
-          <div class="visual-simulation" [class.active]="activeExperience === 'visual'" aria-label="Visual processing simulation text" role="region">
+          <div class="visual-simulation" [class.active]="isSimulationActive('visual')" aria-label="Visual processing simulation text" role="region">
             <span class="visually-hidden">Visual processing differences can affect how we see and interpret information on a page. Some may experience overlapping text, varying contrast sensitivity, or visual stress from certain patterns and colors. This simulation helps demonstrate these experiences to build understanding and empathy.</span>
             <span class="simulation-text" aria-hidden="true">Visual processing differences can affect how we see and interpret information on a page. Some may experience overlapping text, varying contrast sensitivity, or visual stress from certain patterns and colors. This simulation helps demonstrate these experiences to build understanding and empathy.</span>
           </div>
         </div>
-        <button (click)="toggleSimulation('visual')" class="experience-button" [attr.aria-pressed]="activeExperience === 'visual'" aria-label="Toggle visual processing simulation">
-          {{ activeExperience === 'visual' ? 'Stop' : 'Start' }} Simulation
+        <button (click)="toggleSimulation('visual')" class="experience-button" [attr.aria-pressed]="isSimulationActive('visual')" aria-label="Toggle visual processing simulation">
+          {{ isSimulationActive('visual') ? 'Stop' : 'Start' }} Simulation
         </button>
       </div>
     </div>

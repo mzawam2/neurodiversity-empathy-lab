@@ -1,6 +1,11 @@
 import { Component, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+interface SimulationState {
+  isActive: boolean;
+  type: string | null;
+}
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -10,8 +15,12 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent implements OnDestroy {
   activeExperience: string | null = null;
-  simulationActive = false;
   simulationClasses: { [key: string]: boolean } = {};
+  simulationStates: { [key: string]: SimulationState } = {
+    reading: { isActive: false, type: 'reading' },
+    focus: { isActive: false, type: 'focus' },
+    visual: { isActive: false, type: 'visual' }
+  };
   distractionInterval: ReturnType<typeof setInterval> | null = null;
 
   @HostListener('document:keydown.escape')
@@ -21,15 +30,28 @@ export class AppComponent implements OnDestroy {
     }
   }
 
+  isSimulationActive(type: string): boolean {
+    return this.simulationStates[type]?.isActive || false;
+  }
+
   toggleSimulation(type: string) {
-    if (this.activeExperience === type && this.simulationActive) {
+    // First, stop any currently running simulation
+    if (this.activeExperience && this.activeExperience !== type) {
+      this.simulationStates[this.activeExperience].isActive = false;
+      this.clearDistractions();
+    }
+
+    const simulationState = this.simulationStates[type];
+    if (!simulationState) return;
+
+    if (simulationState.isActive) {
       // Stop simulation
-      this.simulationActive = false;
+      simulationState.isActive = false;
       this.activeExperience = null;
       this.clearDistractions();
     } else {
       // Start simulation
-      this.simulationActive = true;
+      simulationState.isActive = true;
       this.activeExperience = type;
       
       if (type === 'focus') {
