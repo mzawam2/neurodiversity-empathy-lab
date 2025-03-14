@@ -1,12 +1,76 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'NeuroDiversity';
+export class AppComponent implements OnDestroy {
+  activeExperience: string | null = null;
+  simulationActive = false;
+  simulationClasses: { [key: string]: boolean } = {};
+  distractionInterval: any;
+
+  toggleSimulation(type: string) {
+    if (this.activeExperience === type && this.simulationActive) {
+      // Stop simulation
+      this.simulationActive = false;
+      this.activeExperience = null;
+      if (this.distractionInterval) {
+        clearInterval(this.distractionInterval);
+      }
+    } else {
+      // Start simulation
+      this.simulationActive = true;
+      this.activeExperience = type;
+      
+      if (type === 'focus') {
+        this.startDistractions();
+      }
+    }
+  }
+
+  private startDistractions() {
+    if (this.distractionInterval) {
+      clearInterval(this.distractionInterval);
+    }
+
+    const taskContent = document.querySelector('.task-content');
+    if (!taskContent) return;
+
+    this.distractionInterval = setInterval(() => {
+      const distraction = document.createElement('div');
+      distraction.className = 'distraction';
+      distraction.style.position = 'absolute';
+      distraction.style.left = Math.random() * 100 + '%';
+      distraction.style.top = Math.random() * 100 + '%';
+      distraction.style.transform = 'translate(-50%, -50%)';
+      distraction.style.opacity = '0';
+      distraction.style.transition = 'opacity 0.5s';
+      
+      const randomWords = ['Focus!', 'Look here!', 'Notice me!', 'Hey!', 'Click!'];
+      distraction.textContent = randomWords[Math.floor(Math.random() * randomWords.length)];
+      
+      taskContent.appendChild(distraction);
+      
+      // Fade in
+      setTimeout(() => {
+        distraction.style.opacity = '0.7';
+      }, 10);
+      
+      // Remove after animation
+      setTimeout(() => {
+        distraction.remove();
+      }, 2000);
+    }, 3000);
+  }
+
+  ngOnDestroy() {
+    if (this.distractionInterval) {
+      clearInterval(this.distractionInterval);
+    }
+  }
 }

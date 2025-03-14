@@ -1,0 +1,140 @@
+.distraction {
+  position: absolute;
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  z-index: 10;
+  font-weight: bold;
+  user-select: none;
+  animation: float 2s ease-in-out infinite;
+}
+
+.focus-task {
+  position: relative;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  min-height: 150px;
+  overflow: hidden;
+}
+
+.task-content {
+  position: relative;
+  z-index: 1;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.dyslexia-simulation {
+  font-family: Arial, sans-serif;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+  font-size: 1.2rem;
+  position: relative;
+  color: #333;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.dyslexia-simulation::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -1px 0 red;
+  top: 0;
+  color: black;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anim-2 {
+  0% {
+    clip: rect(76px, 9999px, 58px, 0);
+    transform: skew(0.5deg);
+  }
+  5% {
+    clip: rect(59px, 9999px, 45px, 0);
+    transform: skew(-0.5deg);
+  }
+  10% {
+    clip: rect(87px, 9999px, 66px, 0);
+    transform: skew(0.3deg);
+  }
+  15% {
+    clip: rect(28px, 9999px, 16px, 0);
+    transform: skew(-0.3deg);
+  }
+  20% {
+    clip: rect(38px, 9999px, 92px, 0);
+    transform: skew(0.4deg);
+  }
+  25% {
+    clip: rect(99px, 9999px, 63px, 0);
+    transform: skew(-0.4deg);
+  }
+  30% {
+    clip: rect(67px, 9999px, 23px, 0);
+    transform: skew(0.2deg);
+  }
+  35% {
+    clip: rect(18px, 9999px, 72px, 0);
+    transform: skew(-0.2deg);
+  }
+  40% {
+    clip: rect(44px, 9999px, 89px, 0);
+    transform: skew(0.6deg);
+  }
+  45% {
+    clip: rect(12px, 9999px, 31px, 0);
+    transform: skew(-0.6deg);
+  }
+  50% {
+    clip: rect(83px, 9999px, 47px, 0);
+    transform: skew(0.4deg);
+  }
+  55% {
+    clip: rect(55px, 9999px, 95px, 0);
+    transform: skew(-0.4deg);
+  }
+  60% {
+    clip: rect(25px, 9999px, 71px, 0);
+    transform: skew(0.3deg);
+  }
+  65% {
+    clip: rect(90px, 9999px, 34px, 0);
+    transform: skew(-0.3deg);
+  }
+  70% {
+    clip: rect(33px, 9999px, 78px, 0);
+    transform: skew(0.5deg);
+  }
+  75% {
+    clip: rect(61px, 9999px, 52px, 0);
+    transform: skew(-0.5deg);
+  }
+  80% {
+    clip: rect(20px, 9999px, 86px, 0);
+    transform: skew(0.2deg);
+  }
+  85% {
+    clip: rect(95px, 9999px, 41px, 0);
+    transform: skew(-0.2deg);
+  }
+  90% {
+    clip: rect(74px, 9999px, 69px, 0);
+    transform: skew(0.4deg);
+  }
+  95% {
+    clip: rect(47px, 9999px, 27px, 0);
+    transform: skew(-0.4deg);
+  }
+  100% {
+    clip: rect(82px, 9999px, 54px, 0);
+    transform: skew(0.5deg);
+  }
+}
