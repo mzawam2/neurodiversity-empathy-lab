@@ -16,11 +16,57 @@
   color: #333;
   position: relative;
   transition: all 0.3s ease;
+  padding: 2rem;
+  background: linear-gradient(45deg, 
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.85)
+  );
+}
+
+.visual-simulation.active {
+  animation: colorPattern 8s infinite;
+}
+
+.visual-simulation.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 0, 0.1) 10px,
+    rgba(255, 255, 0, 0.1) 20px
+  );
+  animation: patternShift 6s infinite;
+  pointer-events: none;
+}
+
+.visual-simulation.active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 15px,
+    rgba(0, 0, 255, 0.1) 15px,
+    rgba(0, 0, 255, 0.1) 30px
+  );
+  animation: patternShift 8s infinite reverse;
+  pointer-events: none;
 }
 
 .simulation-text {
   display: block;
   position: relative;
+  z-index: 1;
 }
 
 .visual-simulation.active .simulation-text {
@@ -50,6 +96,56 @@
 .visual-simulation.active .simulation-text::after {
   color: magenta;
   animation: visual-shift-2 4s infinite;
+}
+
+@keyframes colorPattern {
+  0%, 100% {
+    background: linear-gradient(45deg, 
+      rgba(255, 255, 255, 0.95),
+      rgba(255, 255, 255, 0.85)
+    );
+  }
+  25% {
+    background: linear-gradient(45deg,
+      rgba(255, 255, 200, 0.95),
+      rgba(255, 255, 200, 0.85)
+    );
+  }
+  50% {
+    background: linear-gradient(45deg,
+      rgba(200, 255, 255, 0.95),
+      rgba(200, 255, 255, 0.85)
+    );
+  }
+  75% {
+    background: linear-gradient(45deg,
+      rgba(255, 200, 255, 0.95),
+      rgba(255, 200, 255, 0.85)
+    );
+  }
+}
+
+@keyframes patternShift {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(5px, -5px) scale(1.05);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translate(-5px, 5px) scale(0.95);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
 }
 
 @keyframes visual-process {
@@ -142,13 +238,69 @@
 }
 
 .dyslexia-simulation {
-  font-family: Arial, sans-serif;
-  line-height: 1.8;
-  letter-spacing: 0.5px;
-  font-size: 1.3rem;
+  animation: letterShift 3s infinite;
+  font-family: 'Arial', sans-serif;
   position: relative;
-  color: #333;
-  transition: all 0.3s ease;
+  display: inline-block;
+  letter-spacing: 0.5px;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  padding: 1rem;
+}
+
+.dyslexia-simulation::before,
+.dyslexia-simulation::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: textDistort 4s infinite alternate;
+}
+
+.dyslexia-simulation::before {
+  color: rgba(255, 0, 0, 0.5);
+  transform: translateX(-1px) skewX(2deg);
+}
+
+.dyslexia-simulation::after {
+  color: rgba(0, 0, 255, 0.5);
+  transform: translateX(1px) skewX(-2deg);
+}
+
+@keyframes letterShift {
+  0%, 100% { 
+    transform: skew(0deg, 0deg) rotate(0deg); 
+    letter-spacing: 0.5px;
+  }
+  25% { 
+    transform: skew(1deg, 1deg) rotate(0.5deg); 
+    letter-spacing: 2px;
+  }
+  50% {
+    transform: skew(-1deg, 0deg) rotate(-0.5deg);
+    letter-spacing: 1px;
+  }
+  75% { 
+    transform: skew(-2deg, -1deg) rotate(0.25deg);
+    letter-spacing: 0px;
+  }
+}
+
+@keyframes textDistort {
+  0%, 100% {
+    opacity: 0.7;
+    filter: blur(0.5px);
+  }
+  25%, 75% {
+    opacity: 0.5;
+    filter: blur(1px);
+  }
+  50% {
+    opacity: 0.3;
+    filter: blur(1.5px);
+  }
 }
 
 .dyslexia-simulation.active {
@@ -177,101 +329,24 @@
   }
 }
 
-.dyslexia-simulation::before {
-  content: attr(data-text);
-  position: absolute;
-  left: 2px;
-  text-shadow: -1px 0 rgba(255, 0, 0, 0.5);
-  top: 0;
-  color: black;
-  overflow: hidden;
-  clip: rect(0, 900px, 0, 0);
-  animation: noise-anim-2 4s infinite linear alternate-reverse;
+@media screen and (max-width: 768px) {
+  .visual-simulation {
+    font-size: 1.3rem;
+    padding: 1.5rem;
+  }
+  .dyslexia-simulation {
+    font-size: 1.5rem;
+    padding: 0.75rem;
+  }
 }
 
-@keyframes noise-anim-2 {
-  0% {
-    clip: rect(76px, 9999px, 58px, 0);
-    transform: skew(0.5deg) translateX(0.5px);
+@media screen and (max-width: 480px) {
+  .visual-simulation {
+    font-size: 1.2rem;
+    padding: 1rem;
   }
-  5% {
-    clip: rect(59px, 9999px, 45px, 0);
-    transform: skew(-0.5deg) translateX(-0.5px);
-  }
-  10% {
-    clip: rect(87px, 9999px, 66px, 0);
-    transform: skew(0.3deg) translateX(0.3px);
-  }
-  15% {
-    clip: rect(28px, 9999px, 16px, 0);
-    transform: skew(-0.3deg) translateX(-0.3px);
-  }
-  20% {
-    clip: rect(38px, 9999px, 92px, 0);
-    transform: skew(0.4deg) translateX(0.4px);
-  }
-  25% {
-    clip: rect(99px, 9999px, 63px, 0);
-    transform: skew(-0.4deg) translateX(-0.4px);
-  }
-  30% {
-    clip: rect(67px, 9999px, 23px, 0);
-    transform: skew(0.2deg) translateX(0.2px);
-  }
-  35% {
-    clip: rect(18px, 9999px, 72px, 0);
-    transform: skew(-0.2deg) translateX(-0.2px);
-  }
-  40% {
-    clip: rect(44px, 9999px, 89px, 0);
-    transform: skew(0.6deg) translateX(0.6px);
-  }
-  45% {
-    clip: rect(12px, 9999px, 31px, 0);
-    transform: skew(-0.6deg) translateX(-0.6px);
-  }
-  50% {
-    clip: rect(83px, 9999px, 47px, 0);
-    transform: skew(0.4deg) translateX(0.4px);
-  }
-  55% {
-    clip: rect(55px, 9999px, 95px, 0);
-    transform: skew(-0.4deg) translateX(-0.4px);
-  }
-  60% {
-    clip: rect(25px, 9999px, 71px, 0);
-    transform: skew(0.3deg) translateX(0.3px);
-  }
-  65% {
-    clip: rect(90px, 9999px, 34px, 0);
-    transform: skew(-0.3deg) translateX(-0.3px);
-  }
-  70% {
-    clip: rect(33px, 9999px, 78px, 0);
-    transform: skew(0.5deg) translateX(0.5px);
-  }
-  75% {
-    clip: rect(61px, 9999px, 52px, 0);
-    transform: skew(-0.5deg) translateX(-0.5px);
-  }
-  80% {
-    clip: rect(20px, 9999px, 86px, 0);
-    transform: skew(0.2deg) translateX(0.2px);
-  }
-  85% {
-    clip: rect(95px, 9999px, 41px, 0);
-    transform: skew(-0.2deg) translateX(-0.2px);
-  }
-  90% {
-    clip: rect(74px, 9999px, 69px, 0);
-    transform: skew(0.4deg) translateX(0.4px);
-  }
-  95% {
-    clip: rect(47px, 9999px, 27px, 0);
-    transform: skew(-0.4deg) translateX(-0.4px);
-  }
-  100% {
-    clip: rect(82px, 9999px, 54px, 0);
-    transform: skew(0.5deg) translateX(0.5px);
+  .dyslexia-simulation {
+    font-size: 1.3rem;
+    padding: 0.5rem;
   }
 }

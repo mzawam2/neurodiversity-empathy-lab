@@ -260,7 +260,6 @@
 
   .experience-button:hover {
     background: color-mix(in srgb, var(--bright-blue) 80%, black);
-    transform: translateY(-2px);
   }
 
   .experience-button:active {
@@ -369,7 +368,7 @@
       <div class="experience-card" [class.active]="activeExperience === 'reading'">
         <h2>Reading Experience</h2>
         <div class="simulation-area" [ngClass]="simulationClasses">
-          <p [class.dyslexia-simulation]="isSimulationActive('reading')">
+          <p [class.dyslexia-simulation]="isSimulationActive('reading')" [attr.data-text]="'The quick brown fox jumps over the lazy dog. Reading can be challenging when letters seem to move or get mixed up. This simulation helps understand what some people experience while reading. Try focusing on each word individually as the text appears to shift and move, making it harder to maintain a steady reading flow.'">
             The quick brown fox jumps over the lazy dog. Reading can be challenging 
             when letters seem to move or get mixed up. This simulation helps understand 
             what some people experience while reading. Try focusing on each word individually 
