@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,16 +12,21 @@ export class AppComponent implements OnDestroy {
   activeExperience: string | null = null;
   simulationActive = false;
   simulationClasses: { [key: string]: boolean } = {};
-  distractionInterval: any;
+  distractionInterval: ReturnType<typeof setInterval> | null = null;
+
+  @HostListener('document:keydown.escape')
+  handleEscapeKey() {
+    if (this.activeExperience) {
+      this.toggleSimulation(this.activeExperience);
+    }
+  }
 
   toggleSimulation(type: string) {
     if (this.activeExperience === type && this.simulationActive) {
       // Stop simulation
       this.simulationActive = false;
       this.activeExperience = null;
-      if (this.distractionInterval) {
-        clearInterval(this.distractionInterval);
-      }
+      this.clearDistractions();
     } else {
       // Start simulation
       this.simulationActive = true;
@@ -34,9 +39,7 @@ export class AppComponent implements OnDestroy {
   }
 
   private startDistractions() {
-    if (this.distractionInterval) {
-      clearInterval(this.distractionInterval);
-    }
+    this.clearDistractions();
 
     const taskContent = document.querySelector('.task-content');
     if (!taskContent) return;
@@ -52,7 +55,7 @@ export class AppComponent implements OnDestroy {
       distraction.style.transition = 'opacity 0.5s';
       distraction.style.color = "red";
       distraction.style.fontSize = "2rem";
-      distraction.style.textShadow = " 0 2px 4px rgb(230, 11, 11)";
+      distraction.style.textShadow = "0 2px 4px rgb(230, 11, 11)";
       
       const randomWords = ['Focus!', 'Look here!', 'Notice me!', 'Hey!', 'Click!'];
       distraction.textContent = randomWords[Math.floor(Math.random() * randomWords.length)];
@@ -71,9 +74,14 @@ export class AppComponent implements OnDestroy {
     }, 3000);
   }
 
-  ngOnDestroy() {
+  private clearDistractions() {
     if (this.distractionInterval) {
       clearInterval(this.distractionInterval);
+      this.distractionInterval = null;
     }
+  }
+
+  ngOnDestroy() {
+    this.clearDistractions();
   }
 }

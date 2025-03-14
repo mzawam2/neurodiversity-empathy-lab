@@ -376,7 +376,7 @@
             as the text appears to shift and move, making it harder to maintain a steady reading flow.
           </p>
         </div>
-        <button (click)="toggleSimulation('reading')" class="experience-button">
+        <button (click)="toggleSimulation('reading')" class="experience-button" [attr.aria-pressed]="activeExperience === 'reading'" aria-label="Toggle reading experience simulation">
           {{ simulationActive ? 'Stop' : 'Start' }} Simulation
         </button>
       </div>
@@ -396,8 +396,21 @@
             </div>
           </div>
         </div>
-        <button (click)="toggleSimulation('focus')" class="experience-button">
+        <button (click)="toggleSimulation('focus')" class="experience-button" [attr.aria-pressed]="activeExperience === 'focus'" aria-label="Toggle focus experience simulation">
           {{ simulationActive ? 'Stop' : 'Start' }} Simulation
+        </button>
+      </div>
+
+      <div class="experience-card" [class.active]="activeExperience === 'visual'">
+        <h2>Visual Experience</h2>
+        <div class="simulation-area">
+          <div class="visual-simulation" [class.active]="activeExperience === 'visual'" aria-label="Visual processing simulation text" role="region">
+            <span class="visually-hidden">Visual processing differences can affect how we see and interpret information on a page. Some may experience overlapping text, varying contrast sensitivity, or visual stress from certain patterns and colors. This simulation helps demonstrate these experiences to build understanding and empathy.</span>
+            <span class="simulation-text" aria-hidden="true">Visual processing differences can affect how we see and interpret information on a page. Some may experience overlapping text, varying contrast sensitivity, or visual stress from certain patterns and colors. This simulation helps demonstrate these experiences to build understanding and empathy.</span>
+          </div>
+        </div>
+        <button (click)="toggleSimulation('visual')" class="experience-button" [attr.aria-pressed]="activeExperience === 'visual'" aria-label="Toggle visual processing simulation">
+          {{ activeExperience === 'visual' ? 'Stop' : 'Start' }} Simulation
         </button>
       </div>
     </div>
