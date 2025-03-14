@@ -1,14 +1,14 @@
 .distraction {
   position: absolute;
-  font-size: 1.8rem;
-  color: rgba(0, 0, 0, 0.6);
+  font-size: 10rem;
+  color: red;
   pointer-events: none;
   z-index: 10;
   font-weight: bold;
   user-select: none;
   animation: float 3s ease-in-out infinite;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(45deg, #666, #333);
+  text-shadow: 0 2px 4px rgb(230, 11, 11);
+  background: linear-gradient(45deg, #ec0707, #333);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
