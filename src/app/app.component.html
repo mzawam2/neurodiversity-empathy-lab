@@ -3,7 +3,6 @@
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
 <!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
@@ -358,6 +357,21 @@
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
   }
+
+  .simulation-label {
+    margin-bottom: 1rem;
+  }
+
+  .label-text {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--gray-900);
+  }
+
+  .label-description {
+    font-size: 1rem;
+    color: var(--gray-700);
+  }
 </style>
 
 <main class="main">
@@ -367,6 +381,10 @@
     <div class="experience-container">
       <div class="experience-card" [class.active]="activeExperience === 'reading'">
         <h2>Reading Experience</h2>
+        <div class="simulation-label">
+          <span class="label-text">Simulates aspects of Dyslexia</span>
+          <span class="label-description">A learning difference that can affect how someone reads and processes text</span>
+        </div>
         <div class="simulation-area" [ngClass]="simulationClasses">
           <p [class.dyslexia-simulation]="isSimulationActive('reading')" [attr.data-text]="'The quick brown fox jumps over the lazy dog. Reading can be challenging when letters seem to move or get mixed up. This simulation helps understand what some people experience while reading. Try focusing on each word individually as the text appears to shift and move, making it harder to maintain a steady reading flow.'">
             The quick brown fox jumps over the lazy dog. Reading can be challenging 
@@ -382,6 +400,10 @@
 
       <div class="experience-card" [class.active]="activeExperience === 'focus'">
         <h2>Focus Experience</h2>
+        <div class="simulation-label">
+          <span class="label-text">Simulates aspects of ADHD</span>
+          <span class="label-description">A neurodevelopmental condition that can affect attention and focus</span>
+        </div>
         <div class="simulation-area">
           <div class="focus-task" [class.adhd-simulation]="isSimulationActive('focus')">
             <p>Try to read this important text while distracting elements appear.</p>
@@ -402,6 +424,10 @@
 
       <div class="experience-card" [class.active]="activeExperience === 'visual'">
         <h2>Visual Experience</h2>
+        <div class="simulation-label">
+          <span class="label-text">Simulates aspects of Visual Processing Differences</span>
+          <span class="label-description">Variations in how visual information is processed and perceived</span>
+        </div>
         <div class="simulation-area">
           <div class="visual-simulation" [class.active]="isSimulationActive('visual')" aria-label="Visual processing simulation text" role="region">
             <span class="visually-hidden">Visual processing differences can affect how we see and interpret information on a page. Some may experience overlapping text, varying contrast sensitivity, or visual stress from certain patterns and colors. This simulation helps demonstrate these experiences to build understanding and empathy.</span>

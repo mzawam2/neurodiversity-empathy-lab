@@ -329,6 +329,31 @@
   }
 }
 
+.simulation-label {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid var(--bright-blue);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label-text {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--gray-900);
+  line-height: 1.4;
+}
+
+.label-description {
+  font-size: 1rem;
+  color: var(--gray-700);
+  line-height: 1.5;
+}
+
 @media screen and (max-width: 768px) {
   .visual-simulation {
     font-size: 1.3rem;
@@ -337,6 +362,18 @@
   .dyslexia-simulation {
     font-size: 1.5rem;
     padding: 0.75rem;
+  }
+  .simulation-label {
+    padding: 0.75rem;
+    margin: 0.75rem 0;
+  }
+  
+  .label-text {
+    font-size: 1rem;
+  }
+  
+  .label-description {
+    font-size: 0.9rem;
   }
 }
 
