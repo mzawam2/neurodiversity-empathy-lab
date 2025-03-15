@@ -372,6 +372,22 @@
     font-size: 1rem;
     color: var(--gray-700);
   }
+
+  .adhd-floating-text {
+    position: absolute;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    animation: floatingText 5s infinite;
+  }
+
+  @keyframes floatingText {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(10px, 10px); }
+    50% { transform: translate(20px, 20px); }
+    75% { transform: translate(10px, 10px); }
+    100% { transform: translate(0, 0); }
+  }
 </style>
 
 <main class="main">
@@ -414,6 +430,17 @@
               making it difficult to concentrate on a single task or piece of information.
               This simulation demonstrates one aspect of focus-related challenges that 
               some individuals experience daily.
+            </div>
+            <!-- Floating distractions with ARIA labels for accessibility -->
+            <div class="adhd-floating-text" aria-hidden="true">Remember to call mom</div>
+            <div class="adhd-floating-text" aria-hidden="true">What's for dinner?</div>
+            <div class="adhd-floating-text" aria-hidden="true">Check email</div>
+            <div class="adhd-floating-text" aria-hidden="true">Did I lock the door?</div>
+            <div class="adhd-floating-text" aria-hidden="true">Need to exercise</div>
+            <!-- Screen reader text for accessibility -->
+            <div class="visually-hidden">
+              This simulation includes floating text representing random thoughts that may distract from reading. 
+              These distractions demonstrate how ADHD can affect focus and concentration.
             </div>
           </div>
         </div>

@@ -79,7 +79,7 @@ export class AppComponent implements OnDestroy {
       distraction.style.fontSize = "2rem";
       distraction.style.textShadow = "0 2px 4px rgb(230, 11, 11)";
       
-      const randomWords = ['Focus!', 'Look here!', 'Notice me!', 'Hey!', 'Click!'];
+      const randomWords = ['Look here!', 'Notice me!', 'Hey!', 'Over here!'];
       distraction.textContent = randomWords[Math.floor(Math.random() * randomWords.length)];
       
       taskContent.appendChild(distraction);
