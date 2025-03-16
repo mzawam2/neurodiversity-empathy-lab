@@ -10,23 +10,30 @@
 <main class="main">
   <div class="content">
     <h1>Experience Different Perspectives</h1>
-    
+
     <div class="experience-container">
       <div class="experience-card" [class.active]="activeExperience === 'reading'">
         <h2>Reading Experience</h2>
         <div class="simulation-label">
           <span class="label-text">Simulates aspects of Dyslexia</span>
-          <span class="label-description">A learning difference that can affect how someone reads and processes text</span>
+          <span class="label-description">A learning difference that can affect how someone reads and processes
+            text</span>
         </div>
-        <div class="simulation-area" [ngClass]="simulationClasses">
-          <p [class.dyslexia-simulation]="isSimulationActive('reading')" [attr.data-text]="'The quick brown fox jumps over the lazy dog. Reading can be challenging when letters seem to move or get mixed up. This simulation helps understand what some people experience while reading. Try focusing on each word individually as the text appears to shift and move, making it harder to maintain a steady reading flow.'">
-            The quick brown fox jumps over the lazy dog. Reading can be challenging 
-            when letters seem to move or get mixed up. This simulation helps understand 
-            what some people experience while reading. Try focusing on each word individually 
-            as the text appears to shift and move, making it harder to maintain a steady reading flow.
-          </p>
+        <div class="simulation-area">
+          <div class="task-container">
+            <div class="task-content-card">
+              <p [class.dyslexia-simulation]="isSimulationActive('reading')"
+                [attr.data-text]="'The quick brown fox jumps over the lazy dog. Reading can be challenging when letters seem to move or get mixed up. This simulation helps understand what some people experience while reading. Try focusing on each word individually as the text appears to shift and move, making it harder to maintain a steady reading flow.'">
+                The quick brown fox jumps over the lazy dog. Reading can be challenging
+                when letters seem to move or get mixed up. This simulation helps understand
+                what some people experience while reading. Try focusing on each word individually
+                as the text appears to shift and move, making it harder to maintain a steady reading flow.
+              </p>
+            </div>
+          </div>
         </div>
-        <button (click)="toggleSimulation('reading')" class="experience-button" [attr.aria-pressed]="isSimulationActive('reading')" aria-label="Toggle reading experience simulation">
+        <button (click)="toggleSimulation('reading')" class="experience-button"
+          [attr.aria-pressed]="isSimulationActive('reading')" aria-label="Toggle reading experience simulation">
           {{ isSimulationActive('reading') ? 'Stop' : 'Start' }} Simulation
         </button>
       </div>
@@ -38,30 +45,31 @@
           <span class="label-description">A neurodevelopmental condition that can affect attention and focus</span>
         </div>
         <div class="simulation-area">
-          <div class="focus-task" [class.adhd-simulation]="isSimulationActive('focus')">
-            <p>Try to read this important text while distracting elements appear.</p>
-            <div class="task-content">
-              This is an important task that requires your attention. However, 
-              maintaining focus can be challenging when your mind processes multiple 
-              inputs simultaneously. The brain might be drawn to various stimuli, 
-              making it difficult to concentrate on a single task or piece of information.
-              This simulation demonstrates one aspect of focus-related challenges that 
-              some individuals experience daily.
+          <div class="task-container" [class.adhd-simulation]="isSimulationActive('focus')">
+            <div class="task-content task-content-card">
+              <p>This is an important task that requires your attention. However,
+                maintaining focus can be challenging when your mind processes multiple
+                inputs simultaneously. The brain might be drawn to various stimuli,
+                making it difficult to concentrate on a single task or piece of information.
+                This simulation demonstrates one aspect of focus-related challenges that
+                some individuals experience daily.
+              </p>
             </div>
             <!-- Floating distractions with ARIA labels for accessibility -->
             <div class="adhd-floating-text" aria-hidden="true">Remember to call mom</div>
             <div class="adhd-floating-text" aria-hidden="true">What's for dinner?</div>
-            <div class="adhd-floating-text" aria-hidden="true">Check email</div>
             <div class="adhd-floating-text" aria-hidden="true">Did I lock the door?</div>
+            <div class="adhd-floating-text" aria-hidden="true">Check email</div>
             <div class="adhd-floating-text" aria-hidden="true">Need to exercise</div>
             <!-- Screen reader text for accessibility -->
             <div class="visually-hidden">
-              This simulation includes floating text representing random thoughts that may distract from reading. 
+              This simulation includes floating text representing random thoughts that may distract from reading.
               These distractions demonstrate how ADHD can affect focus and concentration.
             </div>
           </div>
         </div>
-        <button (click)="toggleSimulation('focus')" class="experience-button" [attr.aria-pressed]="isSimulationActive('focus')" aria-label="Toggle focus experience simulation">
+        <button (click)="toggleSimulation('focus')" class="experience-button"
+          [attr.aria-pressed]="isSimulationActive('focus')" aria-label="Toggle focus experience simulation">
           {{ isSimulationActive('focus') ? 'Stop' : 'Start' }} Simulation
         </button>
       </div>
@@ -73,12 +81,16 @@
           <span class="label-description">Variations in how visual information is processed and perceived</span>
         </div>
         <div class="simulation-area">
-          <div class="visual-simulation" [class.active]="isSimulationActive('visual')" aria-label="Visual processing simulation text" role="region">
-            <span class="visually-hidden">Visual processing differences can affect how we see and interpret information on a page. Some may experience overlapping text, varying contrast sensitivity, or visual stress from certain patterns and colors. This simulation helps demonstrate these experiences to build understanding and empathy.</span>
-            <span class="simulation-text" aria-hidden="true">Visual processing differences can affect how we see and interpret information on a page. Some may experience overlapping text, varying contrast sensitivity, or visual stress from certain patterns and colors. This simulation helps demonstrate these experiences to build understanding and empathy.</span>
+          <div class="visual-simulation" [class.active]="isSimulationActive('visual')"
+            aria-label="Visual processing simulation text" role="region">
+            <span class="simulation-text">Visual processing differences can affect how we see and
+              interpret information on a page. Some may experience overlapping text, varying contrast sensitivity, or
+              visual stress from certain patterns and colors. This simulation helps demonstrate these experiences to
+              build understanding and empathy.</span>
           </div>
         </div>
-        <button (click)="toggleSimulation('visual')" class="experience-button" [attr.aria-pressed]="isSimulationActive('visual')" aria-label="Toggle visual processing simulation">
+        <button (click)="toggleSimulation('visual')" class="experience-button"
+          [attr.aria-pressed]="isSimulationActive('visual')" aria-label="Toggle visual processing simulation">
           {{ isSimulationActive('visual') ? 'Stop' : 'Start' }} Simulation
         </button>
       </div>
@@ -87,9 +99,9 @@
     <div class="info-section">
       <h2>About This Experience</h2>
       <p>
-        This application provides simplified simulations to help build understanding 
-        of different cognitive experiences. Remember that these are approximations - 
-        every person's experience is unique and valid. The goal is to foster empathy 
+        This application provides simplified simulations to help build understanding
+        of different cognitive experiences. Remember that these are approximations -
+        every person's experience is unique and valid. The goal is to foster empathy
         and awareness of diverse cognitive styles.
       </p>
     </div>
