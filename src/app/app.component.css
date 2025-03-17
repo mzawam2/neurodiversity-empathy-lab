@@ -131,13 +131,13 @@
   filter: blur(0);
 }
 
-.active .adhd-floating-text:nth-child(1) {
+.active .adhd-floating-text:nth-child(7) {
   animation: float-path-1 18s infinite cubic-bezier(0.4, 0, 0.2, 1);
   top: 15%;
   left: 5%;
 }
 
-.active .adhd-floating-text:nth-child(2) {
+.active .adhd-floating-text:nth-child(8) {
   animation: float-path-2 20s infinite cubic-bezier(0.4, 0, 0.2, 1);
   top: 10%;
   right: 6%;
@@ -369,13 +369,6 @@ h2 {
   gap: 1rem;
 }
 
-h2::before {
-  content: '';
-  width: 4px;
-  height: 24px;
-  background: var(--bright-blue);
-  border-radius: 2px;
-}
 
 .experience-button {
   background: var(--bright-blue);
@@ -876,13 +869,6 @@ h2 {
   gap: 1rem;
 }
 
-h2::before {
-  content: '';
-  width: 4px;
-  height: 24px;
-  background: var(--bright-blue);
-  border-radius: 2px;
-}
 
 .experience-button {
   background: var(--bright-blue);
@@ -1006,7 +992,7 @@ h2::before {
 
 .label-text {
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   color: var(--gray-900);
 }
 

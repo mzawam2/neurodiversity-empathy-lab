@@ -24,7 +24,7 @@
             <div class="task-content-card">
               <p [class.dyslexia-simulation]="isSimulationActive('reading')"
                 [attr.data-text]="'The quick brown fox jumps over the lazy dog. Reading can be challenging when letters seem to move or get mixed up. This simulation helps understand what some people experience while reading. Try focusing on each word individually as the text appears to shift and move, making it harder to maintain a steady reading flow.'">
-                The quick brown fox jumps over the lazy dog. Reading can be challenging
+                The quick brown jumps fox over the dog lazy. Reading can be challenging
                 when letters seem to move or get mixed up. This simulation helps understand
                 what some people experience while reading. Try focusing on each word individually
                 as the text appears to shift and move, making it harder to maintain a steady reading flow.
@@ -46,13 +46,26 @@
         </div>
         <div class="simulation-area">
           <div class="task-container" [class.adhd-simulation]="isSimulationActive('focus')">
-            <div class="task-content task-content-card">
-              <p>This is an important task that requires your attention. However,
+            <!-- Screen reader text for accessibility -->
+            <div class="visually-hidden">
+              This simulation includes floating text representing random thoughts that may distract from reading.
+              These distractions demonstrate how ADHD can affect focus and concentration.  
+            </div>
+            <div class="task-content task-content-card" >
+              <p aria-hidden="true">This is an important task that requires your attention. However,
                 maintaining focus can be challenging when your mind processes multiple
                 inputs simultaneously. The brain might be drawn to various stimuli,
                 making it difficult to concentrate on a single task or piece of information.
                 This simulation demonstrates one aspect of focus-related challenges that
                 some individuals experience daily.
+              </p>
+              <p class="visually-hidden">
+                This is an important task that requires your attention. Remember to call mom. However,
+                maintaining focus can be challenging when, Need to exercise, your mind processes multiple
+                inputs simultaneously. The brain might be drawn to various stimuli,
+                making it difficult to concentrate on a single task or piece of information.  What's for dinner?
+               Check email. This simulation demonstrates one aspect of focus-related challenges that
+                some individuals experience daily.  Did I lock the door?
               </p>
             </div>
             <!-- Floating distractions with ARIA labels for accessibility -->
@@ -61,11 +74,6 @@
             <div class="adhd-floating-text" aria-hidden="true">Did I lock the door?</div>
             <div class="adhd-floating-text" aria-hidden="true">Check email</div>
             <div class="adhd-floating-text" aria-hidden="true">Need to exercise</div>
-            <!-- Screen reader text for accessibility -->
-            <div class="visually-hidden">
-              This simulation includes floating text representing random thoughts that may distract from reading.
-              These distractions demonstrate how ADHD can affect focus and concentration.
-            </div>
           </div>
         </div>
         <button (click)="toggleSimulation('focus')" class="experience-button"
