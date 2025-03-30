@@ -22,8 +22,7 @@
         <div class="simulation-area">
           <div class="task-container">
             <div class="task-content-card">
-              <p [class.dyslexia-simulation]="isSimulationActive('reading')"
-                [attr.data-text]="'The quick brown fox jumps over the lazy dog. Reading can be challenging when letters seem to move or get mixed up. This simulation helps understand what some people experience while reading. Try focusing on each word individually as the text appears to shift and move, making it harder to maintain a steady reading flow.'">
+              <p class="dyslexia-simulation" [class.active]="isSimulationActive('reading')">
                 The quick brown jumps fox over the dog lazy. Reading can be challenging
                 when letters seem to move or get mixed up. This simulation helps understand
                 what some people experience while reading. Try focusing on each word individually

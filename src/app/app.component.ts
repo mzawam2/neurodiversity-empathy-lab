@@ -22,6 +22,8 @@ export class AppComponent implements OnDestroy {
     visual: { isActive: false, type: 'visual' }
   };
   distractionInterval: ReturnType<typeof setInterval> | null = null;
+  private dyslexiaInterval: ReturnType<typeof setInterval> | null = null;
+  private originalText: string = '';
 
   @HostListener('document:keydown.escape')
   handleEscapeKey() {
@@ -39,6 +41,7 @@ export class AppComponent implements OnDestroy {
     if (this.activeExperience && this.activeExperience !== type) {
       this.simulationStates[this.activeExperience].isActive = false;
       this.clearDistractions();
+      this.clearDyslexiaAnimation();
     }
 
     const simulationState = this.simulationStates[type];
@@ -49,6 +52,7 @@ export class AppComponent implements OnDestroy {
       simulationState.isActive = false;
       this.activeExperience = null;
       this.clearDistractions();
+      this.clearDyslexiaAnimation();
     } else {
       // Start simulation
       simulationState.isActive = true;
@@ -56,6 +60,8 @@ export class AppComponent implements OnDestroy {
       
       if (type === 'focus') {
         this.startDistractions();
+      } else if (type === 'reading') {
+        this.startDyslexiaAnimation();
       }
     }
   }
@@ -103,7 +109,61 @@ export class AppComponent implements OnDestroy {
     }
   }
 
+  private startDyslexiaAnimation() {
+    this.clearDyslexiaAnimation();
+
+    const textElement = document.querySelector('.dyslexia-simulation');
+    if (!textElement) return;
+
+    // Store original text first time
+    if (!this.originalText) {
+      this.originalText = textElement.textContent || '';
+    }
+
+    console.log('Starting dyslexia animation');
+    console.log('Original text:', this.originalText);
+
+    const words = this.originalText.split(' ');
+
+    this.dyslexiaInterval = setInterval(() => {
+      const scrambledWords = words.map(word => {
+        if (word.length <= 3) return word;
+        
+        const middle = word.slice(1, -1).split('');
+        for (let i = middle.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [middle[i], middle[j]] = [middle[j], middle[i]];
+        }
+        
+        return word[0] + middle.join('') + word[word.length - 1];
+      });
+
+      console.log('Scrambled words:', scrambledWords);
+
+      textElement.textContent = scrambledWords.join(' ');
+
+      // Reset back to original after a short delay
+      setTimeout(() => {
+        textElement.textContent = this.originalText;
+        console.log('Reset to original text');
+      }, 1500);
+    }, 3000);
+  }
+
+  private clearDyslexiaAnimation() {
+    if (this.dyslexiaInterval) {
+      clearInterval(this.dyslexiaInterval);
+      this.dyslexiaInterval = null;
+
+      const textElement = document.querySelector('.dyslexia-simulation');
+      if (textElement) {
+        textElement.textContent = this.originalText;
+      }
+    }
+  }
+
   ngOnDestroy() {
     this.clearDistractions();
+    this.clearDyslexiaAnimation();
   }
 }
