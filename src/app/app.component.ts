@@ -15,6 +15,7 @@ interface SimulationState {
 })
 export class AppComponent implements OnDestroy {
   activeExperience: string | null = null;
+  selectedVisionType: string = 'macular-degeneration';
   simulationClasses: { [key: string]: boolean } = {};
   simulationStates: { [key: string]: SimulationState } = {
     reading: { isActive: false, type: 'reading' },
@@ -24,6 +25,12 @@ export class AppComponent implements OnDestroy {
   distractionInterval: ReturnType<typeof setInterval> | null = null;
   private dyslexiaInterval: ReturnType<typeof setInterval> | null = null;
   private originalText: string = '';
+  visionTypes = [
+    { id: 'macular-degeneration', name: 'Macular Degeneration' },
+    { id: 'glaucoma', name: 'Glaucoma' },
+    { id: 'cataracts', name: 'Cataracts' },
+    { id: 'diabetic-retinopathy', name: 'Diabetic Retinopathy' }
+  ];
 
   @HostListener('document:keydown.escape')
   handleEscapeKey() {
@@ -63,6 +70,16 @@ export class AppComponent implements OnDestroy {
       } else if (type === 'reading') {
         this.startDyslexiaAnimation();
       }
+    }
+  }
+
+  onVisionTypeChange(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    this.selectedVisionType = select.value;
+    // If simulation is active, reapply the classes
+    if (this.isSimulationActive('visual')) {
+      this.toggleSimulation('visual');
+      this.toggleSimulation('visual');
     }
   }
 
@@ -146,8 +163,8 @@ export class AppComponent implements OnDestroy {
       setTimeout(() => {
         textElement.textContent = this.originalText;
         console.log('Reset to original text');
-      }, 1500);
-    }, 3000);
+      }, 500);
+    }, 1000);
   }
 
   private clearDyslexiaAnimation() {

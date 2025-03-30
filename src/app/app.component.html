@@ -3,7 +3,7 @@
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
 <!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * to get started with your project! * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
@@ -23,7 +23,7 @@
           <div class="task-container">
             <div class="task-content-card">
               <p class="dyslexia-simulation" [class.active]="isSimulationActive('reading')">
-                The quick brown jumps fox over the dog lazy. Reading can be challenging
+                The quick brown fox jumps over the lazy dog. Reading can be challenging
                 when letters seem to move or get mixed up. This simulation helps understand
                 what some people experience while reading. Try focusing on each word individually
                 as the text appears to shift and move, making it harder to maintain a steady reading flow.
@@ -84,20 +84,36 @@
       <div class="experience-card" [class.active]="activeExperience === 'visual'">
         <h2>Visual Experience</h2>
         <div class="simulation-label">
-          <span class="label-text">Simulates aspects of Visual Processing Differences</span>
-          <span class="label-description">Variations in how visual information is processed and perceived</span>
+          <span class="label-text">Simulates aspects of Visual Impairment</span>
+          <span class="label-description">Visual conditions that can affect how someone sees and processes visual information</span>
+        </div>
+        <div class="simulation-controls">
+          <label for="visionType">Select Vision Condition:</label>
+          <select id="visionType" 
+                  (change)="onVisionTypeChange($event)"
+                  [value]="selectedVisionType"
+                  [disabled]="!isSimulationActive('visual')"
+                  class="vision-select">
+            <option *ngFor="let type of visionTypes" [value]="type.id">{{ type.name }}</option>
+          </select>
         </div>
         <div class="simulation-area">
-          <div class="visual-simulation" [class.active]="isSimulationActive('visual')"
-            aria-label="Visual processing simulation text" role="region">
-            <span class="simulation-text">Visual processing differences can affect how we see and
-              interpret information on a page. Some may experience overlapping text, varying contrast sensitivity, or
-              visual stress from certain patterns and colors. This simulation helps demonstrate these experiences to
-              build understanding and empathy.</span>
+          <div class="task-container">
+            <div class="task-content-card visual-simulation" [class.macular-degeneration]="isSimulationActive('visual') && selectedVisionType === 'macular-degeneration'"
+                                                           [class.glaucoma]="isSimulationActive('visual') && selectedVisionType === 'glaucoma'"
+                                                           [class.cataracts]="isSimulationActive('visual') && selectedVisionType === 'cataracts'"
+                                                           [class.diabetic-retinopathy]="isSimulationActive('visual') && selectedVisionType === 'diabetic-retinopathy'">
+              <p>
+                This text demonstrates how visual impairments can affect the way people see and process information. 
+                The simulation includes effects that represent common visual challenges, making it harder to focus 
+                on specific areas of text or images. This helps understand the daily experiences of individuals 
+                with various visual conditions.
+              </p>
+            </div>
           </div>
         </div>
         <button (click)="toggleSimulation('visual')" class="experience-button"
-          [attr.aria-pressed]="isSimulationActive('visual')" aria-label="Toggle visual processing simulation">
+          [attr.aria-pressed]="isSimulationActive('visual')" aria-label="Toggle visual experience simulation">
           {{ isSimulationActive('visual') ? 'Stop' : 'Start' }} Simulation
         </button>
       </div>
