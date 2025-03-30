@@ -98,8 +98,8 @@ export class AppComponent implements OnDestroy {
       // Remove after animation
       setTimeout(() => {
         distraction.remove();
-      }, 2000);
-    }, 3000);
+      }, 2500); 
+    }, 4000); 
   }
 
   private clearDistractions() {
